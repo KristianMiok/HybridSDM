@@ -153,16 +153,30 @@ def format_stats(stats: dict) -> str:
 
 
 def build_prompt(sp_code: str, sp_name: str, X: pd.DataFrame, y: np.ndarray,
-                 n_trees: int, round_num: int = 1, top_trees_json: str = None) -> str:
-    """Build generation prompt with data-informed priors and optional refinement context."""
+                 n_trees: int, round_num: int = 1, top_trees_json: str = None,
+                 pure: bool = False) -> str:
+    """Build generation prompt. If pure=True, omit DT splits and class-conditional stats."""
     stats = compute_stats(X)
     stats_block = format_stats(stats)
-    class_stats = compute_class_conditional_stats(X, y)
-    dt_rules = get_dt_splits(X, y)
     priors = SPECIES_PRIORS.get(sp_code, [])
     priors_block = "\n".join(f"- {p}" for p in priors)
     n1, n0 = int(y.sum()), int((y == 0).sum())
     class_ratio = f"presence={n1} | true_absence={n0} (total={len(y)})"
+
+    # Data-informed sections (omitted in pure mode)
+    class_stats_section = ""
+    dt_section = ""
+    if not pure:
+        class_stats = compute_class_conditional_stats(X, y)
+        dt_rules = get_dt_splits(X, y)
+        class_stats_section = f"""
+CLASS-CONDITIONAL STATISTICS (use these to place thresholds where classes separate):
+{class_stats}
+"""
+        dt_section = f"""
+DATA-DRIVEN DECISION TREE (for reference — a DT trained on this data found these splits):
+{dt_rules}
+"""
 
     refinement_section = ""
     if round_num > 1 and top_trees_json:
@@ -187,20 +201,14 @@ ALLOWED FEATURES (ONLY): {', '.join(PREDICTORS)}
 
 ECOLOGICAL PRIORS:
 {priors_block}
-
-CLASS-CONDITIONAL STATISTICS (use these to place thresholds where classes separate):
-{class_stats}
-
+{class_stats_section}
 OVERALL PREDICTOR RANGES:
 {stats_block}
-
-DATA-DRIVEN DECISION TREE (for reference — a DT trained on this data found these splits):
-{dt_rules}
-
+{dt_section}
 {refinement_section}DIVERSITY & QUALITY CONSTRAINTS:
 - Cycle root features across trees (use each of [{', '.join(PREDICTORS)}] roughly equally).
 - Per tree, test at most 2 different features.
-- Place thresholds where presence and absence distributions SEPARATE (use class-conditional stats).
+- Place thresholds where presence and absence distributions SEPARATE.
 - Avoid thresholds that put nearly all data on one side of the split.
 - Each tree should capture a DIFFERENT ecological hypothesis.
 
@@ -372,11 +380,15 @@ def score_ensemble_cv(trees: list, X: pd.DataFrame, y: np.ndarray) -> float:
 # ══════════════════════════════════════════════
 
 def generate_trees_v2(sp_code: str, sp_name: str, X: pd.DataFrame, y: np.ndarray,
-                      dry_run: bool = False) -> List[dict]:
+                      dry_run: bool = False, pure: bool = False) -> List[dict]:
 
     stats = compute_stats(X)
-    audit_dir = OUTPUTS_DIR / sp_code / "llm_audit_v2"
+    suffix = "_pure" if pure else ""
+    audit_dir = OUTPUTS_DIR / sp_code / f"llm_audit_v2{suffix}"
     audit_dir.mkdir(parents=True, exist_ok=True)
+
+    if pure:
+        print(f"  [PURE MODE] No DT splits or class-conditional stats in prompt")
 
     all_candidates = []
 
@@ -405,7 +417,8 @@ def generate_trees_v2(sp_code: str, sp_name: str, X: pd.DataFrame, y: np.ndarray
             print(f"  Batch {batch_idx+1}/{n_batches} (n={n_this}, temp={temp})...", end=" ", flush=True)
 
             prompt = build_prompt(sp_code, sp_name, X, y, n_this,
-                                  round_num=round_num, top_trees_json=top_trees_json)
+                                  round_num=round_num, top_trees_json=top_trees_json,
+                                  pure=pure)
 
             # Save prompt
             prompt_path = audit_dir / f"r{round_num}_batch{batch_idx+1}_prompt.txt"
@@ -543,6 +556,8 @@ def main():
     parser = argparse.ArgumentParser(description="Generate LLM trees v2 (improved)")
     parser.add_argument("--species", type=str, default=None, choices=list(SPECIES.keys()))
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--pure", action="store_true",
+                        help="Pure mode: LLM sees only aggregate stats + priors, no DT splits or class-conditional stats")
     args = parser.parse_args()
 
     if not EXCEL_FILE.exists():
@@ -557,20 +572,24 @@ def main():
 
     LLM_TREES_DIR.mkdir(parents=True, exist_ok=True)
 
+    mode_label = "PURE" if args.pure else "FULL"
+
     for sp_code in species_list:
         sp = SPECIES[sp_code]
         print(f"\n{'='*70}")
-        print(f"V2 Tree Generation: {sp['full_name']} ({sp_code})")
+        print(f"V2 Tree Generation [{mode_label}]: {sp['full_name']} ({sp_code})")
         print(f"{'='*70}")
 
         X, y = build_species_frame(df, sp)
         n1, n0 = int(y.sum()), int(len(y) - y.sum())
         print(f"  Data: {len(y)} samples (presence={n1}, absence={n0})")
 
-        trees = generate_trees_v2(sp_code, sp["full_name"], X, y, dry_run=args.dry_run)
+        trees = generate_trees_v2(sp_code, sp["full_name"], X, y,
+                                   dry_run=args.dry_run, pure=args.pure)
 
         if trees:
-            out_path = LLM_TREES_DIR / f"paper_llm_trees_{sp_code}.json"
+            suffix = "_pure" if args.pure else ""
+            out_path = LLM_TREES_DIR / f"paper_llm_trees_{sp_code}{suffix}.json"
             out_path.write_text(json.dumps(trees, indent=2), encoding="utf-8")
             print(f"\n  ✓ Saved {len(trees)} trees to {out_path}")
 

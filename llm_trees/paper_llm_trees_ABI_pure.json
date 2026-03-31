@@ -1,0 +1,158 @@
+[
+  {
+    "tree_id": 1,
+    "target": "ABI_BIN",
+    "max_depth": 2,
+    "root": {
+      "feature": "FFP",
+      "op": "<=",
+      "value": 0.889,
+      "quantile_hint": "q80",
+      "left": {
+        "feature": "ALT",
+        "op": ">",
+        "value": 302,
+        "quantile_hint": "q60",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "leaf": 0
+        }
+      },
+      "right": {
+        "leaf": 0
+      }
+    }
+  },
+  {
+    "tree_id": 2,
+    "target": "ABI_BIN",
+    "max_depth": 2,
+    "root": {
+      "feature": "FFP",
+      "op": ">",
+      "value": 0.889,
+      "quantile_hint": "q80",
+      "left": {
+        "leaf": 0
+      },
+      "right": {
+        "feature": "ALT",
+        "op": ">",
+        "value": 300,
+        "quantile_hint": "q60",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "leaf": 0
+        }
+      }
+    }
+  },
+  {
+    "tree_id": 3,
+    "target": "ABI_BIN",
+    "max_depth": 2,
+    "root": {
+      "feature": "FFP",
+      "op": "<=",
+      "value": 0.889,
+      "quantile_hint": "q80",
+      "left": {
+        "feature": "BIO1",
+        "op": "<=",
+        "value": 9.44,
+        "quantile_hint": "q40",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "leaf": 0
+        }
+      },
+      "right": {
+        "leaf": 0
+      }
+    }
+  },
+  {
+    "tree_id": 4,
+    "target": "ABI_BIN",
+    "max_depth": 2,
+    "root": {
+      "feature": "BIO1",
+      "op": "<=",
+      "value": 10.4,
+      "quantile_hint": "q60",
+      "left": {
+        "feature": "RWQ",
+        "op": "<=",
+        "value": 0.151,
+        "quantile_hint": "q20",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "leaf": 0
+        }
+      },
+      "right": {
+        "leaf": 0
+      }
+    }
+  },
+  {
+    "tree_id": 5,
+    "target": "ABI_BIN",
+    "max_depth": 2,
+    "root": {
+      "feature": "FFP",
+      "op": "<=",
+      "value": 0.889,
+      "quantile_hint": "q80",
+      "left": {
+        "feature": "BIO1",
+        "op": "<=",
+        "value": 9.94,
+        "quantile_hint": "q50",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "leaf": 0
+        }
+      },
+      "right": {
+        "leaf": 0
+      }
+    }
+  },
+  {
+    "tree_id": 6,
+    "target": "ABI_BIN",
+    "max_depth": 2,
+    "root": {
+      "feature": "RWQ",
+      "op": "<=",
+      "value": 0.151,
+      "quantile_hint": "q20",
+      "left": {
+        "feature": "BIO1",
+        "op": "<=",
+        "value": 9.94,
+        "quantile_hint": "q50",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "leaf": 0
+        }
+      },
+      "right": {
+        "leaf": 0
+      }
+    }
+  }
+]

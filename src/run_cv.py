@@ -191,10 +191,11 @@ def run_species_cv(
     return df_summary, df_folds, shap_data
 
 
-def run_one_species(df: pd.DataFrame, sp_code: str):
+def run_one_species(df: pd.DataFrame, sp_code: str, pure: bool = False):
     """Load data + optional LLM trees, run CV, save results."""
     sp = SPECIES[sp_code]
-    banner(f"Species: {sp['full_name']} ({sp_code}) — {sp['context']}")
+    mode = " [PURE]" if pure else ""
+    banner(f"Species: {sp['full_name']} ({sp_code}) — {sp['context']}{mode}")
 
     X, y = build_species_frame(df, sp)
     n1 = int(y.sum())
@@ -202,7 +203,8 @@ def run_one_species(df: pd.DataFrame, sp_code: str):
     print(f"  Samples: {len(y)} (presence={n1}, absence={n0})")
 
     # Look for LLM trees JSON
-    llm_path = LLM_TREES_DIR / f"paper_llm_trees_{sp_code}.json"
+    suffix = "_pure" if pure else ""
+    llm_path = LLM_TREES_DIR / f"paper_llm_trees_{sp_code}{suffix}.json"
     trees = None
     if llm_path.exists():
         trees = load_llm_trees(str(llm_path))
@@ -244,6 +246,8 @@ def main():
     parser.add_argument("--species", type=str, default=None,
                         choices=list(SPECIES.keys()),
                         help="Run for a single species (default: all)")
+    parser.add_argument("--pure", action="store_true",
+                        help="Use pure-mode LLM trees (paper_llm_trees_{CODE}_pure.json)")
     args = parser.parse_args()
 
     if not EXCEL_FILE.exists():
@@ -260,7 +264,7 @@ def main():
     all_summaries = {}
 
     for sp_code in species_list:
-        summary = run_one_species(df, sp_code)
+        summary = run_one_species(df, sp_code, pure=args.pure)
         all_summaries[sp_code] = summary
 
     # If all species were run, create comparison table

@@ -1,0 +1,184 @@
+[
+  {
+    "tree_id": 1,
+    "target": "AUT_BIN",
+    "max_depth": 2,
+    "root": {
+      "feature": "RWQ",
+      "op": "<=",
+      "value": 1.02,
+      "quantile_hint": "q60",
+      "left": {
+        "leaf": 1
+      },
+      "right": {
+        "feature": "FFP",
+        "op": ">",
+        "value": 1.04,
+        "quantile_hint": "q80",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "leaf": 0
+        }
+      }
+    }
+  },
+  {
+    "tree_id": 2,
+    "target": "AUT_BIN",
+    "max_depth": 2,
+    "root": {
+      "feature": "ALT",
+      "op": "<=",
+      "value": 352,
+      "quantile_hint": "q60",
+      "left": {
+        "leaf": 0
+      },
+      "right": {
+        "feature": "FFP",
+        "op": ">",
+        "value": 0.524,
+        "quantile_hint": "q60",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "leaf": 1
+        }
+      }
+    }
+  },
+  {
+    "tree_id": 3,
+    "target": "AUT_BIN",
+    "max_depth": 2,
+    "root": {
+      "feature": "ALT",
+      "op": "<=",
+      "value": 178,
+      "quantile_hint": "q40",
+      "left": {
+        "leaf": 0
+      },
+      "right": {
+        "feature": "FFP",
+        "op": ">",
+        "value": 11.9,
+        "quantile_hint": "max",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "leaf": 1
+        }
+      }
+    }
+  },
+  {
+    "tree_id": 4,
+    "target": "AUT_BIN",
+    "max_depth": 2,
+    "root": {
+      "feature": "RWQ",
+      "op": "<=",
+      "value": 0.0075,
+      "quantile_hint": "q05",
+      "left": {
+        "leaf": 1
+      },
+      "right": {
+        "feature": "FFP",
+        "op": ">",
+        "value": 0.000804,
+        "quantile_hint": "q20",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "leaf": 0
+        }
+      }
+    }
+  },
+  {
+    "tree_id": 5,
+    "target": "AUT_BIN",
+    "max_depth": 2,
+    "root": {
+      "feature": "RWQ",
+      "op": "<=",
+      "value": 1.81,
+      "quantile_hint": "q80",
+      "left": {
+        "leaf": 1
+      },
+      "right": {
+        "feature": "BIO1",
+        "op": ">",
+        "value": 11.6,
+        "quantile_hint": "q95",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "leaf": 0
+        }
+      }
+    }
+  },
+  {
+    "tree_id": 6,
+    "target": "AUT_BIN",
+    "max_depth": 2,
+    "root": {
+      "feature": "ALT",
+      "op": "<=",
+      "value": 277,
+      "quantile_hint": "q50",
+      "left": {
+        "leaf": 0
+      },
+      "right": {
+        "feature": "BIO1",
+        "op": ">",
+        "value": 9.26,
+        "quantile_hint": "q40",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "leaf": 1
+        }
+      }
+    }
+  },
+  {
+    "tree_id": 7,
+    "target": "AUT_BIN",
+    "max_depth": 2,
+    "root": {
+      "feature": "RWQ",
+      "op": "<=",
+      "value": 1.81,
+      "quantile_hint": "q80",
+      "left": {
+        "leaf": 1
+      },
+      "right": {
+        "feature": "BIO1",
+        "op": ">",
+        "value": 12.2791996,
+        "quantile_hint": "max",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "leaf": 0
+        }
+      }
+    }
+  }
+]
