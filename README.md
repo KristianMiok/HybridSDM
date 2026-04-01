@@ -110,16 +110,6 @@ python src/run_cv.py --species AUT
 python src/run_shap.py
 ```
 
-## Key Results
-
-### Cross-species comparison (Macro-F1, 5-fold CV)
-
-| Species | DT | LLM Pure | LLM Full | Best Hybrid | RF |
-|---|---|---|---|---|---|
-| *A. torrentium* | 0.752 | 0.765 | **0.773** | 0.769 | 0.779 |
-| *A. bihariensis* | 0.682 | 0.753 | **0.787** | 0.751 | 0.672 |
-| *F. limosus* | 0.938 | 0.928 | **0.953** | 0.953 | 0.930 |
-
 ### What the LLM sees vs. does NOT see
 
 **Sees:** aggregate statistics, quantiles, class balance, ecological priors, (full mode: class-conditional means, DT splits)
