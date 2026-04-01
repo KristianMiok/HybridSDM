@@ -100,9 +100,14 @@ def run_shap_analysis(X, y, sp_code, out_dir):
         explainer = shap.TreeExplainer(rf)
         shap_values = explainer.shap_values(X)
 
-        # For binary classification, shap_values is a list [class0, class1]
+        # For binary classification, shap_values may be:
+        #   - list [class0, class1] (older shap)
+        #   - 3D array (n_samples, n_features, n_classes) (newer shap)
+        #   - 2D array (n_samples, n_features) (some versions)
         if isinstance(shap_values, list):
             sv = shap_values[1]  # SHAP for presence class
+        elif shap_values.ndim == 3:
+            sv = shap_values[:, :, 1]  # 3D: take presence class slice
         else:
             sv = shap_values
 
