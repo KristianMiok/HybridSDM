@@ -1,6 +1,4 @@
-# Hybrid DT–LLM Framework for Explainable Species Distribution Modelling
-
-Reproducible experiments for the manuscript: *"Hybrid decision tree–language model framework for explainable species distribution modelling"*
+# No Black Box Needed: Language Model–Derived Rule Ensembles for Accurate and Interpretable Species Distribution Modelling
 
 ## Species
 
@@ -21,41 +19,28 @@ All models use 4 ecologically relevant predictors:
 ## Repository Structure
 
 ```
-hybrid-sdm-experiments/
 ├── data/
-│   └── NETWORK.xlsx                    # Main dataset (place here)
+│   └── NETWORK.xlsx                    # Occurrence dataset (Satmari et al. 2023)
 ├── llm_trees/
-│   ├── paper_llm_trees_AUT.json        # Full-mode LLM trees (data-informed)
-│   ├── paper_llm_trees_ABI.json
-│   ├── paper_llm_trees_FXL.json
-│   ├── paper_llm_trees_AUT_pure.json   # Pure-mode LLM trees (priors only)
-│   ├── paper_llm_trees_ABI_pure.json
-│   └── paper_llm_trees_FXL_pure.json
+│   ├── paper_llm_trees_{CODE}.json     # LLM trees (data-informed prompt)
+│   └── paper_llm_trees_{CODE}_pure.json # LLM trees (priors-only prompt)
 ├── outputs/
-│   ├── AUT/
-│   │   ├── cv5_summary.csv             # Model comparison table
+│   ├── {CODE}/
+│   │   ├── cv5_summary.csv             # Model comparison
 │   │   ├── cv5_perfold.csv             # Per-fold metrics
 │   │   ├── dt_rules_per_fold.txt       # DT stability analysis
-│   │   ├── rf_feature_importances.csv
-│   │   ├── shap/                       # SHAP plots & data
-│   │   ├── llm_audit/                  # v1 API audit trail
-│   │   └── llm_audit_v2/              # v2 API audit trail
-│   ├── ABI/
-│   ├── FXL/
-│   └── comparison/
-│       ├── species_comparison.csv
-│       ├── predictor_correlations.csv
-│       └── correlation_heatmap.png
+│   │   ├── shap/                       # SHAP plots and data
+│   │   └── llm_audit_v2/              # Full API audit trail
+│   └── comparison/                     # Cross-species summaries
 ├── src/
-│   ├── config.py                       # All hyperparameters & paths
-│   ├── utils.py                        # Data loading, LLM tree eval, metrics
-│   ├── explore_data.py                 # Data exploration & diagnostics
-│   ├── generate_prompts.py             # Build prompts (text files only)
+│   ├── config.py                       # All hyperparameters and paths
+│   ├── utils.py                        # Data loading, tree evaluation, metrics
+│   ├── explore_data.py                 # Data exploration and diagnostics
 │   ├── generate_llm_trees.py           # v1: basic API generation
 │   ├── generate_llm_trees_v2.py        # v2: over-generate + greedy selection
 │   ├── run_cv.py                       # 5-fold CV: DT + LLM + hybrids + RF
 │   ├── run_shap.py                     # SHAP analysis for RF benchmark
-│   └── legacy/                         # Original FXL-only scripts
+│   └── export_figure_data.py           # Export CSV data for figures
 ├── requirements.txt
 └── README.md
 ```
@@ -64,7 +49,7 @@ hybrid-sdm-experiments/
 
 ```bash
 pip install -r requirements.txt
-conda install -c conda-forge openai   # or: pip install openai
+conda install -c conda-forge openai
 export OPENAI_API_KEY="sk-..."
 ```
 
@@ -72,67 +57,49 @@ Place `NETWORK.xlsx` in `data/`.
 
 ## Workflow
 
-### Step 1: Explore data
+### 1. Explore data
 ```bash
 python src/explore_data.py
 ```
-Outputs: correlation matrix (ALT–BIO1 r = −0.93), class balance, predictor boxplots.
 
-### Step 2: Generate LLM trees (v2 — recommended)
+### 2. Generate LLM trees via API
 ```bash
-# Full mode (class-conditional stats + DT splits in prompt):
-python src/generate_llm_trees_v2.py
-
-# Pure mode (only ecological priors + aggregate stats — for ablation):
-python src/generate_llm_trees_v2.py --pure
-
-# Single species:
-python src/generate_llm_trees_v2.py --species AUT
+python src/generate_llm_trees_v2.py              # data-informed prompt
+python src/generate_llm_trees_v2.py --pure        # priors-only prompt (ablation)
+python src/generate_llm_trees_v2.py --species AUT  # single species
 ```
 
-v2 improvements over v1:
-- Over-generates 150 candidates, keeps best via greedy ensemble selection
-- Multi-temperature (0.4, 0.7, 0.9) for diversity
-- Class-conditional statistics guide threshold placement
-- DT splits shown as reference (full mode only)
-- Iterative refinement: round 2 is guided by top trees from round 1
-- Adaptive ensemble size: stops adding trees when performance drops
-
-### Step 3: Run cross-validation
+### 3. Run cross-validation
 ```bash
-python src/run_cv.py            # using full-mode trees
-python src/run_cv.py --pure     # using pure-mode trees (ablation)
-python src/run_cv.py --species AUT
+python src/run_cv.py              # using data-informed trees
+python src/run_cv.py --pure       # using priors-only trees
 ```
 
-### Step 4: SHAP analysis (requires shap package)
+### 4. SHAP analysis
 ```bash
 python src/run_shap.py
 ```
 
-### What the LLM sees vs. does NOT see
+### 5. Export figure data
+```bash
+python src/export_figure_data.py
+```
 
-**Sees:** aggregate statistics, quantiles, class balance, ecological priors, (full mode: class-conditional means, DT splits)
+## What the LLM sees
 
-**Does NOT see:** individual data points, site coordinates, raw occurrence records
-
-The greedy ensemble selection evaluates candidate trees against training data — this is analogous to hyperparameter tuning, not data leakage.
-
-## Models Evaluated
-
-| Model | Type | Interpretable? |
-|-------|------|---------------|
-| DT(d=2) | Shallow decision tree | Full |
-| LLM(N-tree) | LLM-generated ensemble | Full |
-| AND / OR / k-veto / soft-veto / blend | Hybrid DT+LLM variants | Full |
-| stacked(logistic) | Logistic meta-model | Semi |
-| RF(500) | Random Forest benchmark | Black-box |
+The LLM receives **aggregate statistics** (quantiles, class-conditional means, class balance), **ecological priors**, and optionally **DT splits** as reference. It never sees individual data points, site coordinates, or raw occurrence records. The greedy ensemble selection evaluates candidates against training data, analogous to hyperparameter tuning.
 
 ## Reproducibility
 
-- Fixed random seeds (42) for CV splits and model training
+- Fixed random seed (42) for all CV splits and model training
 - Every API prompt, raw response, and repair action saved in `llm_audit_v2/`
-- Generation metadata (model, temperature, timestamps, tree scores) logged as JSON
-- Same 5-fold CV structure used for all models within each species
-- Commit `llm_trees/*.json` and reuse for all downstream analyses
-- LLM outputs are non-deterministic; committed trees are the canonical set
+- Generation metadata (model, temperature, timestamps) logged as JSON
+- LLM outputs are non-deterministic; committed `llm_trees/*.json` files are the canonical set used for all reported results
+
+## Data
+
+Occurrence data from: Satmari, A. et al. 2023. Headwater refuges: Flow protects *Austropotamobius* crayfish from *Faxonius limosus* invasion. *NeoBiota* 89: 71–94. doi: [10.17632/5vg35hc58m.3](https://doi.org/10.17632/5vg35hc58m.3)
+
+## License
+
+Code: MIT. Data: see original publication.
