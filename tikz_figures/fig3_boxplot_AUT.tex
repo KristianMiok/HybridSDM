@@ -1,0 +1,83 @@
+\documentclass[border=8pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{statistics}
+\usepackage{xcolor}
+
+\definecolor{abscolor}{HTML}{4C72B0}
+\definecolor{prescolor}{HTML}{DD8452}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+  width=9cm, height=8cm,
+  title={\textit{A.~torrentium}: LLM vote fraction by DT prediction},
+  title style={font=\bfseries\small},
+  ylabel={LLM presence vote fraction},
+  ylabel style={font=\small},
+  xtick={1,2},
+  xticklabels={DT predicts\\absence (0), DT predicts\\presence (1)},
+  xticklabel style={font=\small, align=center},
+  ymin=-0.05, ymax=1.1,
+  ytick={0,0.2,0.4,0.6,0.8,1.0},
+  ymajorgrids=true,
+  grid style={dashed, gray!30},
+  boxplot/draw direction=y,
+  cycle list={{abscolor},{prescolor}},
+]
+
+% DT=0: min=0, q25=0, med=0, q75=0, max=0 (whisker), outliers above
+\addplot+[
+  boxplot prepared={
+    lower whisker=0.00,
+    lower quartile=0.00,
+    median=0.00,
+    upper quartile=0.00,
+    upper whisker=0.00,
+  },
+  boxplot/draw position=1,
+  boxplot prepared/.cd,
+  fill=abscolor!30,
+  draw=abscolor,
+  every box/.style={thick},
+  every whisker/.style={thick},
+  every median/.style={thick, black},
+] coordinates {
+  (1, 0.111) (1, 0.111) (1, 0.111) (1, 0.111) (1, 0.111) (1, 0.111)
+  (1, 0.222) (1, 0.222) (1, 0.222) (1, 0.222) (1, 0.222) (1, 0.222)
+  (1, 0.333) (1, 0.333) (1, 0.333)
+  (1, 0.444) (1, 0.444) (1, 0.444) (1, 0.444) (1, 0.444) (1, 0.444) (1, 0.444) (1, 0.444) (1, 0.444)
+  (1, 0.556)
+};
+
+% DT=1: min=0.22, q25=0.56, med=0.89, q75=0.89, max=1.0
+\addplot+[
+  boxplot prepared={
+    lower whisker=0.22,
+    lower quartile=0.56,
+    median=0.89,
+    upper quartile=0.89,
+    upper whisker=1.00,
+  },
+  boxplot/draw position=2,
+  boxplot prepared/.cd,
+  fill=prescolor!30,
+  draw=prescolor,
+  every box/.style={thick},
+  every whisker/.style={thick},
+  every median/.style={thick, black},
+] coordinates {};
+
+% Annotations
+\node[font=\footnotesize, abscolor] at (axis cs:1,0.65) {$n = 117$};
+\node[font=\footnotesize, prescolor] at (axis cs:2,0.12) {$n = 156$};
+
+% Mean markers
+\addplot[only marks, mark=triangle*, mark size=2.5pt, abscolor] coordinates {(1, 0.06)};
+\addplot[only marks, mark=triangle*, mark size=2.5pt, prescolor] coordinates {(2, 0.75)};
+
+\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,69 @@
+\documentclass[border=8pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{xcolor}
+
+\definecolor{barcolor}{HTML}{D4940A}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+  width=14cm, height=9cm,
+  title={(B) LLM rule activation frequency --- \textit{A.~torrentium}},
+  title style={font=\bfseries\small},
+  xlabel={Frequency across test instances},
+  xlabel style={font=\small},
+  xbar,
+  bar width=10pt,
+  xmin=0, xmax=185,
+  ytick=data,
+  yticklabels={
+    {ALT$>$333 \& RWQ$\leq$0.87 $\to$ 1},
+    {RWQ$>$1.07 \& BIO1$>$9.65 $\to$ 0},
+    {BIO1$\leq$9.1 $\to$ 1},
+    {ALT$>$258 \& FFP$\leq$1.27 $\to$ 0},
+    {RWQ$>$0.1 \& ALT$>$258 $\to$ 1},
+    {BIO1$>$9.65 \& FFP$\leq$0.29 $\to$ 0},
+    {RWQ$>$0.34 \& ALT$\leq$333 $\to$ 0},
+    {ALT$\leq$258 $\to$ 0},
+    {BIO1$\leq$9.65 $\to$ 1},
+    {BIO1$>$9.1 \& RWQ$>$0.34 $\to$ 0},
+    {ALT$\leq$333 $\to$ 0},
+    {ALT$\leq$333 $\to$ 0},
+    {RWQ$\leq$1.02 $\to$ 1},
+    {RWQ$\leq$1.07 $\to$ 1}
+  },
+  yticklabel style={font=\footnotesize},
+  y dir=reverse,
+  nodes near coords,
+  nodes near coords style={font=\footnotesize, anchor=west},
+  xmajorgrids=true,
+  grid style={dashed, gray!30},
+  enlarge y limits={abs=0.3},
+]
+\addplot[fill=barcolor, draw=barcolor!80!black] coordinates {
+  (166, 0)
+  (164, 1)
+  (155, 2)
+  (155, 3)
+  (138, 4)
+  (136, 5)
+  (130, 6)
+  (127, 7)
+  (120, 8)
+  (108, 9)
+  (105, 10)
+  (103, 11)
+  (100, 12)
+  (97, 13)
+};
+
+% Highlight presence rules vs absence rules
+% (presence rules: indices 0, 1, 5, 8, 12)
+% We could add color coding but keeping it simple for now
+
+\end{axis}
+\end{tikzpicture}
+\end{document}
