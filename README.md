@@ -1,5 +1,4 @@
-# No Black Box Needed: Language Model–Derived Rule Ensembles for Accurate and Interpretable Species Distribution Modelling
-
+# Interpretable by design: language model-derived ecological rules for species distribution modelling
 ## Species
 
 | Code | Species | Context |
