@@ -1,80 +1,128 @@
-\documentclass[border=8pt]{standalone}
+\documentclass[border=10pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{tikz}
 \usetikzlibrary{calc, positioning, fit, backgrounds}
 \usepackage{xcolor}
-\usepackage{amssymb}
 
 \definecolor{tpcolor}{HTML}{2CA02C}
 \definecolor{fpcolor}{HTML}{D62728}
-\definecolor{fncolor}{HTML}{FF7F0E}
-\definecolor{cardgray}{HTML}{F5F5F5}
+\definecolor{modcolor}{HTML}{FF7F0E}
+\definecolor{cardgray}{HTML}{F7F7F7}
 \definecolor{rulebox}{HTML}{FFF8E1}
-\definecolor{headerblue}{HTML}{1F4E79}
-
-\newcommand{\explcard}[9]{%
-  % #1=x, #2=y, #3=type label, #4=type color, #5=site, #6=obs/dt/llm, #7=DT path, #8=top rules, #9=predictors
-  \begin{scope}[shift={(#1,#2)}]
-    % Card background
-    \fill[cardgray, rounded corners=4pt] (0,0) rectangle (7.8,-4.8);
-    \draw[#4, thick, rounded corners=4pt] (0,0) rectangle (7.8,-4.8);
-    % Header
-    \fill[#4, rounded corners=4pt] (0,0) rectangle (7.8,-0.55);
-    \node[white, font=\bfseries\small, anchor=west] at (0.2,-0.28) {#3};
-    \node[white, font=\small, anchor=east] at (7.6,-0.28) {#5};
-    % Content
-    \node[font=\footnotesize, anchor=north west, text width=7.4cm] at (0.2,-0.75) {#6};
-    % DT path
-    \node[font=\footnotesize, anchor=north west, text width=7.4cm] at (0.2,-1.55) {%
-      \textbf{DT path:} #7};
-    % Predictors
-    \node[font=\footnotesize, anchor=north west, text width=7.4cm, text=gray!70!black] at (0.2,-2.2) {#9};
-    % Rules box
-    \fill[rulebox, rounded corners=2pt] (0.15,-2.85) rectangle (7.65,-4.65);
-    \draw[orange!50!brown, rounded corners=2pt] (0.15,-2.85) rectangle (7.65,-4.65);
-    \node[font=\footnotesize, anchor=north west, text width=7.2cm] at (0.3,-2.95) {%
-      \textbf{Top activated LLM rules:}\\[2pt]
-      #8};
-  \end{scope}
-}
+\definecolor{predbox}{HTML}{EBF5FB}
 
 \begin{document}
 \begin{tikzpicture}
 
-% Card 1: True Positive — site 112546
-\explcard{0}{0}%
-  {True Positive}{tpcolor}%
-  {Site 112546, Fold 1}%
-  {Observed: \textbf{1} (presence) \quad DT pred: \textbf{1} \quad LLM vote: \textbf{0.78}}%
-  {RWQ $\leq$ 1.07 $\to$ ALT $>$ 118.8\,m $\to$ \colorbox{tpcolor!15}{Presence}}%
-  {\footnotesize%
-    \textbullet~tree\#2: RWQ $\leq$ 1.07 $\to$ 1 \quad
-    \textbullet~tree\#3: FFP $\leq$ 0.06 \& RWQ $>$ 0.56 $\to$ 1\\
-    \textbullet~tree\#4: BIO1 $\leq$ 9.26 $\to$ 1}%
-  {RWQ\,=\,0.83 \quad ALT\,=\,459.9\,m \quad FFP\,=\,0.11 \quad BIO1\,=\,8.86\,$^\circ$C}
+% ============================================================
+% CARD 1: True Positive — site 112546
+% ============================================================
+\begin{scope}[shift={(0,0)}]
+  \fill[cardgray, rounded corners=5pt] (0,0) rectangle (13,-6.6);
+  \draw[tpcolor, thick, rounded corners=5pt] (0,0) rectangle (13,-6.6);
+  \fill[tpcolor, rounded corners=5pt] (0,0) rectangle (13,-0.65);
+  \fill[tpcolor] (0,-0.45) rectangle (13,-0.65);
+  \node[white, font=\bfseries] at (3.2,-0.33) {True Positive};
+  \node[white, font=\small] at (10.5,-0.33) {Site 112546 --- Fold 1};
+  \node[anchor=north west, font=\small, text width=12.2cm] at (0.4,-0.9) {%
+    Observed: \textbf{1} (presence) \hfill 
+    DT prediction: \textbf{1} (presence) \hfill 
+    LLM vote: \textbf{0.80}};
+  \node[anchor=north west, font=\small, text width=12.2cm] at (0.4,-1.6) {%
+    \textbf{DT decision path:} \quad
+    RWQ $\leq$ 1.07 \;$\rightarrow$\; ALT $>$ 118.8\,m \;$\rightarrow$\; 
+    \colorbox{tpcolor!15}{\strut\, Presence\,}};
+  \fill[predbox, rounded corners=3pt] (0.3,-2.35) rectangle (12.7,-3.35);
+  \draw[blue!30, rounded corners=3pt] (0.3,-2.35) rectangle (12.7,-3.35);
+  \node[anchor=north west, font=\small, text width=12cm] at (0.5,-2.5) {%
+    \textbf{Predictors:}\\[2pt]
+    RWQ\,=\,0.83 \qquad ALT\,=\,459.9\,m \qquad FFP\,=\,0.11 \qquad BIO1\,=\,8.86\,$^\circ$C};
+  \fill[rulebox, rounded corners=3pt] (0.3,-3.6) rectangle (12.7,-6.35);
+  \draw[orange!50!brown, rounded corners=3pt] (0.3,-3.6) rectangle (12.7,-6.35);
+  \node[anchor=north west, font=\small\bfseries] at (0.5,-3.75) {LLM ensemble agrees (4 of 5 trees vote presence):};
+  \node[anchor=north west, font=\small, text width=11.8cm] at (0.5,-4.35) {%
+    \begin{tabular}{@{}l@{\quad}l@{}}
+    tree\#1: & RWQ $\leq$ 1.07 $\rightarrow$ \textbf{1} (presence) \\[3pt]
+    tree\#3: & BIO1 $\leq$ 9.64 $\rightarrow$ \textbf{1} (presence) \\[3pt]
+    tree\#4: & ALT $>$ 356 $\rightarrow$ \textbf{1} (presence) \\
+    \end{tabular}};
+\end{scope}
 
-% Card 2: FP where LLM disagrees — site 120154
-\explcard{0}{-5.4}%
-  {False Positive --- LLM flags error}{fpcolor}%
-  {Site 120154, Fold 1}%
-  {Observed: \textbf{0} (absence) \quad DT pred: \textbf{1} \quad LLM vote: \textbf{0.22}}%
-  {RWQ $\leq$ 1.07 $\to$ ALT $>$ 118.8\,m $\to$ \colorbox{fpcolor!15}{Presence (wrong)}}%
-  {\footnotesize%
-    \textbullet~tree\#8: BIO1 $\leq$ 10.2 $\to$ 1\\
-    \textbullet~7 of 9 LLM trees voted \textbf{absence}: low altitude (160\,m) and warm temperature (10.6\,$^\circ$C) indicated unsuitability}%
-  {RWQ\,=\,0.90 \quad ALT\,=\,159.6\,m \quad FFP\,=\,0.00 \quad BIO1\,=\,10.62\,$^\circ$C}
+% ============================================================
+% CARD 2: False Positive — site 120154 (LLM strongly disagrees, vote=0.00)
+% ============================================================
+\begin{scope}[shift={(0,-7.2)}]
+  \fill[cardgray, rounded corners=5pt] (0,0) rectangle (13,-7.8);
+  \draw[fpcolor, thick, rounded corners=5pt] (0,0) rectangle (13,-7.8);
+  \fill[fpcolor, rounded corners=5pt] (0,0) rectangle (13,-0.65);
+  \fill[fpcolor] (0,-0.45) rectangle (13,-0.65);
+  \node[white, font=\bfseries] at (4.0,-0.33) {False Positive --- LLM rejects unanimously};
+  \node[white, font=\small] at (10.5,-0.33) {Site 120154 --- Fold 1};
+  \node[anchor=north west, font=\small, text width=12.2cm] at (0.4,-0.9) {%
+    Observed: \textbf{0} (absence) \hfill
+    DT prediction: \textbf{1} (presence) \hfill
+    LLM vote: \textbf{0.00}};
+  \node[anchor=north west, font=\small, text width=12.2cm] at (0.4,-1.6) {%
+    \textbf{DT decision path:} \quad
+    RWQ $\leq$ 1.07 \;$\rightarrow$\; ALT $>$ 118.8\,m \;$\rightarrow$\;
+    \colorbox{fpcolor!15}{\strut\, Presence (incorrect)\,}};
+  \fill[predbox, rounded corners=3pt] (0.3,-2.35) rectangle (12.7,-3.35);
+  \draw[blue!30, rounded corners=3pt] (0.3,-2.35) rectangle (12.7,-3.35);
+  \node[anchor=north west, font=\small, text width=12cm] at (0.5,-2.5) {%
+    \textbf{Predictors:}\\[2pt]
+    RWQ\,=\,0.90 \qquad ALT\,=\,159.6\,m \qquad FFP\,=\,0.00 \qquad BIO1\,=\,10.62\,$^\circ$C};
+  \fill[rulebox, rounded corners=3pt] (0.3,-3.6) rectangle (12.7,-7.55);
+  \draw[orange!50!brown, rounded corners=3pt] (0.3,-3.6) rectangle (12.7,-7.55);
+  \node[anchor=north west, font=\small\bfseries] at (0.5,-3.75) {All 5 LLM trees vote absence:};
+  \node[anchor=north west, font=\small, text width=11.8cm] at (0.5,-4.35) {%
+    \begin{tabular}{@{}l@{\quad}l@{}}
+    tree\#1: & ALT $\leq$ 369.6 $\rightarrow$ \textbf{0} (absence — low altitude) \\[3pt]
+    tree\#2: & BIO1 $>$ 9.16 \& RWQ $>$ 0.76 $\rightarrow$ \textbf{0} (warm \& degraded) \\[3pt]
+    tree\#3: & ALT $\leq$ 277 $\rightarrow$ \textbf{0} (absence — low altitude) \\
+    \end{tabular}};
+  \node[anchor=north west, font=\small, text width=11.8cm, text=fpcolor!80!black] at (0.5,-6.4) {%
+    \textit{The LLM ensemble correctly identified this site as unsuitable:}\\
+    \textit{low altitude (160\,m) and warm temperature (10.6\,$^\circ$C) trigger}\\
+    \textit{multiple absence rules, flagging this as a DT false positive.}};
+\end{scope}
 
-% Card 3: True Positive with moderate LLM — site 174044
-\explcard{0}{-10.8}%
-  {True Positive --- moderate confidence}{fncolor}%
-  {Site 174044, Fold 1}%
-  {Observed: \textbf{1} (presence) \quad DT pred: \textbf{1} \quad LLM vote: \textbf{0.67}}%
-  {RWQ $\leq$ 1.07 $\to$ ALT $>$ 118.8\,m $\to$ \colorbox{tpcolor!15}{Presence}}%
-  {\footnotesize%
-    \textbullet~tree\#1: RWQ $>$ 0.1 \& ALT $>$ 258 $\to$ 1\\
-    \textbullet~tree\#5: BIO1 $>$ 9.1 \& RWQ $>$ 0.34 $\to$ 0 \quad (3 trees dissent due to warm temperature and moderate RWQ)}%
-  {RWQ\,=\,0.12 \quad ALT\,=\,325.5\,m \quad FFP\,=\,1.57 \quad BIO1\,=\,9.94\,$^\circ$C}
+% ============================================================
+% CARD 3: True Positive moderate — site 125941 (vote=0.60)
+% ============================================================
+\begin{scope}[shift={(0,-15.6)}]
+  \fill[cardgray, rounded corners=5pt] (0,0) rectangle (13,-7.4);
+  \draw[modcolor, thick, rounded corners=5pt] (0,0) rectangle (13,-7.4);
+  \fill[modcolor, rounded corners=5pt] (0,0) rectangle (13,-0.65);
+  \fill[modcolor] (0,-0.45) rectangle (13,-0.65);
+  \node[white, font=\bfseries] at (4.2,-0.33) {True Positive --- moderate confidence};
+  \node[white, font=\small] at (10.5,-0.33) {Site 125941 --- Fold 1};
+  \node[anchor=north west, font=\small, text width=12.2cm] at (0.4,-0.9) {%
+    Observed: \textbf{1} (presence) \hfill
+    DT prediction: \textbf{1} (presence) \hfill
+    LLM vote: \textbf{0.60}};
+  \node[anchor=north west, font=\small, text width=12.2cm] at (0.4,-1.6) {%
+    \textbf{DT decision path:} \quad
+    RWQ $\leq$ 1.07 \;$\rightarrow$\; ALT $>$ 118.8\,m \;$\rightarrow$\;
+    \colorbox{tpcolor!15}{\strut\, Presence\,}};
+  \fill[predbox, rounded corners=3pt] (0.3,-2.35) rectangle (12.7,-3.35);
+  \draw[blue!30, rounded corners=3pt] (0.3,-2.35) rectangle (12.7,-3.35);
+  \node[anchor=north west, font=\small, text width=12cm] at (0.5,-2.5) {%
+    \textbf{Predictors:}\\[2pt]
+    RWQ\,=\,0.90 \qquad ALT\,=\,400.5\,m \qquad FFP\,=\,0.91 \qquad BIO1\,=\,9.37\,$^\circ$C};
+  \fill[rulebox, rounded corners=3pt] (0.3,-3.6) rectangle (12.7,-7.15);
+  \draw[orange!50!brown, rounded corners=3pt] (0.3,-3.6) rectangle (12.7,-7.15);
+  \node[anchor=north west, font=\small\bfseries] at (0.5,-3.75) {LLM ensemble split (3 of 5 trees vote presence):};
+  \node[anchor=north west, font=\small, text width=11.8cm] at (0.5,-4.35) {%
+    \begin{tabular}{@{}l@{\quad}l@{}}
+    tree\#1: & RWQ $\leq$ 1.07 $\rightarrow$ \textbf{1} (presence) \\[3pt]
+    tree\#2: & BIO1 $\leq$ 9.64 $\rightarrow$ \textbf{1} (presence) \\[3pt]
+    tree\#3: & BIO1 $>$ 9.16 \& RWQ $>$ 0.76 $\rightarrow$ \textbf{0} (absence — dissenter) \\
+    \end{tabular}};
+  \node[anchor=north west, font=\small, text width=11.8cm, text=modcolor!80!black] at (0.5,-5.85) {%
+    \textit{2 of 5 trees dissent: borderline RWQ (0.90) and warm}\\
+    \textit{temperature (9.37\,$^\circ$C) place this site near an ecological boundary.}};
+\end{scope}
 
 \end{tikzpicture}
 \end{document}

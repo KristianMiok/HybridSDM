@@ -1,69 +1,56 @@
-\documentclass[border=8pt]{standalone}
+\documentclass[border=10pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.18}
+\usepackage{tikz}
 \usepackage{xcolor}
 
-\definecolor{barcolor}{HTML}{D4940A}
+\definecolor{presbar}{HTML}{2CA02C}
+\definecolor{absbar}{HTML}{D62728}
+\definecolor{gridgray}{HTML}{E0E0E0}
 
 \begin{document}
-\begin{tikzpicture}
-\begin{axis}[
-  width=14cm, height=9cm,
-  title={(B) LLM rule activation frequency --- \textit{A.~torrentium}},
-  title style={font=\bfseries\small},
-  xlabel={Frequency across test instances},
-  xlabel style={font=\small},
-  xbar,
-  bar width=10pt,
-  xmin=0, xmax=185,
-  ytick=data,
-  yticklabels={
-    {ALT$>$333 \& RWQ$\leq$0.87 $\to$ 1},
-    {RWQ$>$1.07 \& BIO1$>$9.65 $\to$ 0},
-    {BIO1$\leq$9.1 $\to$ 1},
-    {ALT$>$258 \& FFP$\leq$1.27 $\to$ 0},
-    {RWQ$>$0.1 \& ALT$>$258 $\to$ 1},
-    {BIO1$>$9.65 \& FFP$\leq$0.29 $\to$ 0},
-    {RWQ$>$0.34 \& ALT$\leq$333 $\to$ 0},
-    {ALT$\leq$258 $\to$ 0},
-    {BIO1$\leq$9.65 $\to$ 1},
-    {BIO1$>$9.1 \& RWQ$>$0.34 $\to$ 0},
-    {ALT$\leq$333 $\to$ 0},
-    {ALT$\leq$333 $\to$ 0},
-    {RWQ$\leq$1.02 $\to$ 1},
-    {RWQ$\leq$1.07 $\to$ 1}
-  },
-  yticklabel style={font=\footnotesize},
-  y dir=reverse,
-  nodes near coords,
-  nodes near coords style={font=\footnotesize, anchor=west},
-  xmajorgrids=true,
-  grid style={dashed, gray!30},
-  enlarge y limits={abs=0.3},
-]
-\addplot[fill=barcolor, draw=barcolor!80!black] coordinates {
-  (166, 0)
-  (164, 1)
-  (155, 2)
-  (155, 3)
-  (138, 4)
-  (136, 5)
-  (130, 6)
-  (127, 7)
-  (120, 8)
-  (108, 9)
-  (105, 10)
-  (103, 11)
-  (100, 12)
-  (97, 13)
-};
+\begin{tikzpicture}[y=-0.55cm]
 
-% Highlight presence rules vs absence rules
-% (presence rules: indices 0, 1, 5, 8, 12)
-% We could add color coding but keeping it simple for now
+\node[font=\bfseries\small, anchor=south] at (5,0.6) {(B) LLM rule activation frequency across per-fold ensembles --- \textit{A.~torrentium}};
 
-\end{axis}
+\def\barscale{1.4}
+
+\foreach \v in {0,1,2} {
+  \draw[gridgray] ({\v*\barscale},1) -- ({\v*\barscale},15);
+  \node[font=\tiny, anchor=north, gray] at ({\v*\barscale},15.3) {\v};
+}
+\node[font=\small, anchor=north] at ({1*\barscale},16.0) {Frequency (count across 5 folds)};
+
+\newcommand{\mybar}[4]{%
+  % #1 = y position, #2 = value, #3 = label, #4 = color (pres/abs)
+  \fill[#4, rounded corners=1pt] (0,#1) rectangle ({#2*\barscale},{#1+0.42});
+  \node[font=\tiny, anchor=east] at (-0.15,{#1+0.21}) {#3};
+  \node[font=\tiny, anchor=west] at ({#2*\barscale+0.05},{#1+0.21}) {#2};
+}
+
+% Rules sorted by frequency (descending), green=presence, red=absence
+\mybar{1}{2}{RWQ $\leq$ 1.07 $\to$ 1}{presbar}
+\mybar{2}{2}{ALT $\leq$ 369.6 $\to$ 0}{absbar}
+\mybar{3}{1}{BIO1 $\leq$ 9.16 $\to$ 1}{presbar}
+\mybar{4}{1}{BIO1 $>$ 9.16 \& RWQ $>$ 0.76 $\to$ 0}{absbar}
+\mybar{5}{1}{BIO1 $>$ 9.16 \& RWQ $\leq$ 0.76 $\to$ 0}{absbar}
+\mybar{6}{1}{ALT $>$ 356 $\to$ 1}{presbar}
+\mybar{7}{1}{ALT $\leq$ 356 \& BIO1 $\leq$ 11.6 $\to$ 0}{absbar}
+\mybar{8}{1}{ALT $\leq$ 181 $\to$ 0}{absbar}
+\mybar{9}{1}{ALT $>$ 181 \& BIO1 $\leq$ 9.64 $\to$ 1}{presbar}
+\mybar{10}{1}{ALT $>$ 181 \& BIO1 $>$ 9.64 $\to$ 0}{absbar}
+\mybar{11}{1}{ALT $\leq$ 277 $\to$ 0}{absbar}
+\mybar{12}{1}{ALT $>$ 277 \& FFP $>$ 1.35 $\to$ 1}{presbar}
+\mybar{13}{1}{ALT $>$ 277 \& FFP $\leq$ 1.35 $\to$ 0}{absbar}
+\mybar{14}{1}{BIO1 $\leq$ 9.64 $\to$ 1}{presbar}
+
+% Legend
+\fill[presbar, rounded corners=1pt] (3.5, 1.0) rectangle (3.7, 1.3);
+\node[font=\tiny, anchor=west] at (3.75, 1.15) {presence rule};
+\fill[absbar, rounded corners=1pt] (3.5, 1.7) rectangle (3.7, 2.0);
+\node[font=\tiny, anchor=west] at (3.75, 1.85) {absence rule};
+
+\draw[thick] (0,0.5) -- (0,15);
+
 \end{tikzpicture}
 \end{document}

@@ -1,0 +1,9 @@
+feature,threshold,fold_count
+BIO1,9.59,3
+FFP,0.94,3
+ALT,291.46,1
+ALT,321.13,1
+BIO1,9.11,1
+FFP,0.72,1
+FFP,0.93,1
+RWQ,0.15,1
