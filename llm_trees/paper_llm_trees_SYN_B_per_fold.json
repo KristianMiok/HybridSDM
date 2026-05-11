@@ -1,0 +1,142 @@
+{
+  "fold_1": [
+    {
+      "tree_id": 4,
+      "target": "SYN_B_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "BIO1",
+        "op": "<=",
+        "value": 7.34,
+        "quantile_hint": "q20",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "ALT",
+          "op": ">",
+          "value": 400.4,
+          "quantile_hint": "q40",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    }
+  ],
+  "fold_2": [
+    {
+      "tree_id": 16,
+      "target": "SYN_B_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "BIO1",
+        "op": "<=",
+        "value": 5.41,
+        "quantile_hint": "q05",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "ALT",
+          "op": "<=",
+          "value": 394.9,
+          "quantile_hint": "q40",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 1
+          }
+        }
+      }
+    }
+  ],
+  "fold_3": [
+    {
+      "tree_id": 4,
+      "target": "SYN_B_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "BIO1",
+        "op": "<=",
+        "value": 8.75,
+        "quantile_hint": "q40",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "ALT",
+          "op": ">",
+          "value": 400.27,
+          "quantile_hint": "q40",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    }
+  ],
+  "fold_4": [
+    {
+      "tree_id": 1,
+      "target": "SYN_B_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 400.27,
+        "quantile_hint": "q40",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "RWQ",
+          "op": ">",
+          "value": 1.42,
+          "quantile_hint": "q75",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 1
+          }
+        }
+      }
+    }
+  ],
+  "fold_5": [
+    {
+      "tree_id": 1,
+      "target": "SYN_B_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 400.27,
+        "quantile_hint": "q40",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "BIO1",
+          "op": ">",
+          "value": 9.26,
+          "quantile_hint": "q50",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 1
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "fold_1": [
+    {
+      "tree_id": 1,
+      "target": "SYN_A_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "RWQ",
+        "op": "<=",
+        "value": 0.99,
+        "quantile_hint": "q60",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "RWQ",
+          "op": ">",
+          "value": 1.12,
+          "quantile_hint": "q25",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    }
+  ],
+  "fold_2": [
+    {
+      "tree_id": 1,
+      "target": "SYN_A_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "RWQ",
+        "op": "<=",
+        "value": 0.99,
+        "quantile_hint": "q60",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "ALT",
+          "op": ">",
+          "value": 515,
+          "quantile_hint": "q60",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    }
+  ],
+  "fold_3": [
+    {
+      "tree_id": 1,
+      "target": "SYN_A_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "RWQ",
+        "op": "<=",
+        "value": 0.99,
+        "quantile_hint": "q60",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "BIO1",
+          "op": ">",
+          "value": 9.21,
+          "quantile_hint": "q50",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    }
+  ],
+  "fold_4": [
+    {
+      "tree_id": 1,
+      "target": "SYN_A_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "RWQ",
+        "op": "<=",
+        "value": 0.99,
+        "quantile_hint": "q60",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "RWQ",
+          "op": ">",
+          "value": 0.99,
+          "quantile_hint": "q60",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    }
+  ],
+  "fold_5": [
+    {
+      "tree_id": 19,
+      "target": "SYN_A_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "FFP",
+        "op": "<=",
+        "value": 0.0639,
+        "quantile_hint": "q05",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "RWQ",
+          "op": "<=",
+          "value": 0.99,
+          "quantile_hint": "q60",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 10,
+      "target": "SYN_A_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 223,
+        "quantile_hint": "q20",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "RWQ",
+          "op": "<=",
+          "value": 0.99,
+          "quantile_hint": "q60",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 15,
+      "target": "SYN_A_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "FFP",
+        "op": "<=",
+        "value": 0.0639,
+        "quantile_hint": "q05",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "RWQ",
+          "op": ">",
+          "value": 0.99,
+          "quantile_hint": "q60",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 1
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 16,
+      "target": "SYN_A_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "BIO1",
+        "op": "<=",
+        "value": 7.54,
+        "quantile_hint": "q20",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "RWQ",
+          "op": "<=",
+          "value": 0.99,
+          "quantile_hint": "q60",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    }
+  ]
+}

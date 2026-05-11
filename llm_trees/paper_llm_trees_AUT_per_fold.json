@@ -1,0 +1,818 @@
+{
+  "fold_1": [
+    {
+      "tree_id": 12,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "BIO1",
+        "op": "<=",
+        "value": 9.16,
+        "quantile_hint": "q40",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "RWQ",
+          "op": ">",
+          "value": 0.76,
+          "quantile_hint": "q75",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 18,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": ">",
+        "value": 356,
+        "quantile_hint": "q60",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "BIO1",
+          "op": "<=",
+          "value": 11.6,
+          "quantile_hint": "q95",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 10,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 181,
+        "quantile_hint": "q40",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "BIO1",
+          "op": "<=",
+          "value": 9.64,
+          "quantile_hint": "median",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 14,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 277,
+        "quantile_hint": "q50",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "FFP",
+          "op": ">",
+          "value": 1.35,
+          "quantile_hint": "q75",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 16,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "BIO1",
+        "op": "<=",
+        "value": 9.64,
+        "quantile_hint": "q50",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "RWQ",
+          "op": ">",
+          "value": 1.03,
+          "quantile_hint": "q60",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    }
+  ],
+  "fold_2": [
+    {
+      "tree_id": 9,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "RWQ",
+        "op": "<=",
+        "value": 0.1,
+        "quantile_hint": "q25",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "ALT",
+          "op": ">",
+          "value": 275,
+          "quantile_hint": "q50",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 11,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "FFP",
+        "op": "<=",
+        "value": 0.524,
+        "quantile_hint": "q60",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "BIO1",
+          "op": "<=",
+          "value": 9.68,
+          "quantile_hint": "q50",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 19,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "RWQ",
+        "op": ">",
+        "value": 1.81,
+        "quantile_hint": "q80",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "ALT",
+          "op": ">",
+          "value": 79.7,
+          "quantile_hint": "q20",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 1,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "RWQ",
+        "op": "<=",
+        "value": 1.07,
+        "quantile_hint": "q60",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "BIO1",
+          "op": ">",
+          "value": 9.15,
+          "quantile_hint": "q40",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 2,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 369.6,
+        "quantile_hint": "q40",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "RWQ",
+          "op": "<=",
+          "value": 0.85,
+          "quantile_hint": "q75",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 10,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 337,
+        "quantile_hint": "q60",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "FFP",
+          "op": "<=",
+          "value": 0.524,
+          "quantile_hint": "q60",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 1
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 7,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "FFP",
+        "op": "<=",
+        "value": 0.284,
+        "quantile_hint": "q50",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "RWQ",
+          "op": "<=",
+          "value": 0.872,
+          "quantile_hint": "q50",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    }
+  ],
+  "fold_3": [
+    {
+      "tree_id": 10,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 755,
+        "quantile_hint": "q95",
+        "left": {
+          "feature": "RWQ",
+          "op": "<=",
+          "value": 1.0,
+          "quantile_hint": "q50",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        },
+        "right": {
+          "leaf": 0
+        }
+      }
+    },
+    {
+      "tree_id": 8,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "BIO1",
+        "op": "<=",
+        "value": 8.84,
+        "quantile_hint": "q50",
+        "left": {
+          "feature": "ALT",
+          "op": "<=",
+          "value": 581.67,
+          "quantile_hint": "q75",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        },
+        "right": {
+          "leaf": 0
+        }
+      }
+    },
+    {
+      "tree_id": 18,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 84.1,
+        "quantile_hint": "q20",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "FFP",
+          "op": "<=",
+          "value": 2.36,
+          "quantile_hint": "q95",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 4,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "FFP",
+        "op": "<=",
+        "value": 0.71,
+        "quantile_hint": "q75",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "ALT",
+          "op": "<=",
+          "value": 402.66,
+          "quantile_hint": "q75",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 1,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "RWQ",
+        "op": "<=",
+        "value": 1.07,
+        "quantile_hint": "q60",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "ALT",
+          "op": "<=",
+          "value": 113.57,
+          "quantile_hint": "q05",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 19,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "FFP",
+        "op": "<=",
+        "value": 0.7,
+        "quantile_hint": "custom",
+        "left": {
+          "feature": "ALT",
+          "op": "<=",
+          "value": 325.97,
+          "quantile_hint": "q25",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 1
+          }
+        },
+        "right": {
+          "leaf": 0
+        }
+      }
+    },
+    {
+      "tree_id": 12,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "BIO1",
+        "op": "<=",
+        "value": 8.84,
+        "quantile_hint": "q40",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "FFP",
+          "op": "<=",
+          "value": 0.497,
+          "quantile_hint": "q60",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 1
+          }
+        }
+      }
+    }
+  ],
+  "fold_4": [
+    {
+      "tree_id": 9,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "RWQ",
+        "op": "<=",
+        "value": 0.12,
+        "quantile_hint": "q25",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "ALT",
+          "op": "<=",
+          "value": 266,
+          "quantile_hint": "q50",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 1
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 10,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 118.78,
+        "quantile_hint": "q05",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "RWQ",
+          "op": "<=",
+          "value": 0.668,
+          "quantile_hint": "q40",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 2,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 369.6,
+        "quantile_hint": "q75",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "RWQ",
+          "op": "<=",
+          "value": 1.07,
+          "quantile_hint": "q60",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 2,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 266,
+        "quantile_hint": "q50",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "RWQ",
+          "op": "<=",
+          "value": 0.83,
+          "quantile_hint": "q75",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 13,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "RWQ",
+        "op": "<=",
+        "value": 1.19,
+        "quantile_hint": "q60",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "BIO1",
+          "op": ">",
+          "value": 9.25,
+          "quantile_hint": "q25",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 15,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "BIO1",
+        "op": "<=",
+        "value": 9.7,
+        "quantile_hint": "q50",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "RWQ",
+          "op": ">",
+          "value": 0.901,
+          "quantile_hint": "q50",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 13,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "RWQ",
+        "op": "<=",
+        "value": 0.147,
+        "quantile_hint": "q20",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "BIO1",
+          "op": "<=",
+          "value": 9.25,
+          "quantile_hint": "q25",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    }
+  ],
+  "fold_5": [
+    {
+      "tree_id": 16,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "FFP",
+        "op": ">",
+        "value": 2.42,
+        "quantile_hint": "q95",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "ALT",
+          "op": "<=",
+          "value": 267.55,
+          "quantile_hint": "mean",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 1
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 8,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "FFP",
+        "op": "<=",
+        "value": 0.3,
+        "quantile_hint": "q50",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "BIO1",
+          "op": ">",
+          "value": 9.84,
+          "quantile_hint": "mean",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 1,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "RWQ",
+        "op": "<=",
+        "value": 1.12,
+        "quantile_hint": "q60",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "BIO1",
+          "op": "<=",
+          "value": 9.1,
+          "quantile_hint": "q40",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 6,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 335.43,
+        "quantile_hint": "q25",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "FFP",
+          "op": ">",
+          "value": 0.72,
+          "quantile_hint": "q75",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 1
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 9,
+      "target": "AUT_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "RWQ",
+        "op": "<=",
+        "value": 1.81,
+        "quantile_hint": "q80",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "FFP",
+          "op": ">",
+          "value": 2.42,
+          "quantile_hint": "q95",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    }
+  ]
+}

@@ -233,18 +233,24 @@ OUTPUT: STRICT JSON array of EXACTLY {n_trees} trees, NO commentary:
 # API CALLS
 # ══════════════════════════════════════════════
 
+import os as _os
+SAFETY_IDENTIFIER = _os.environ.get("OPENAI_SAFETY_IDENTIFIER", "")
+
 def call_openai(prompt: str, temperature: float = 0.7) -> str:
     from openai import OpenAI
     client = OpenAI(api_key=OPENAI_API_KEY)
-    response = client.chat.completions.create(
-        model=OPENAI_MODEL,
-        messages=[
+    kwargs = {
+        "model": OPENAI_MODEL,
+        "messages": [
             {"role": "system", "content": "You are an expert aquatic ecologist. Output ONLY valid JSON."},
             {"role": "user", "content": prompt},
         ],
-        temperature=temperature,
-        max_tokens=16000,
-    )
+        "temperature": temperature,
+        "max_tokens": 16000,
+    }
+    if SAFETY_IDENTIFIER:
+        kwargs["safety_identifier"] = SAFETY_IDENTIFIER
+    response = client.chat.completions.create(**kwargs)
     return response.choices[0].message.content
 
 

@@ -1,0 +1,324 @@
+{
+  "fold_1": [
+    {
+      "tree_id": 1,
+      "target": "FXL_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 95.24,
+        "quantile_hint": "q05",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "FFP",
+          "op": ">",
+          "value": 0.08,
+          "quantile_hint": "q05",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    }
+  ],
+  "fold_2": [
+    {
+      "tree_id": 5,
+      "target": "FXL_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": ">",
+        "value": 134.62,
+        "quantile_hint": "q40",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "BIO1",
+          "op": "<=",
+          "value": 9.58,
+          "quantile_hint": "q40",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 1
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 10,
+      "target": "FXL_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "RWQ",
+        "op": "<=",
+        "value": 0.95,
+        "quantile_hint": "q75",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "ALT",
+          "op": "<=",
+          "value": 95.24,
+          "quantile_hint": "q05",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 13,
+      "target": "FXL_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 95.24,
+        "quantile_hint": "q40",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "FFP",
+          "op": "<=",
+          "value": 0.04,
+          "quantile_hint": "q75",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    }
+  ],
+  "fold_3": [
+    {
+      "tree_id": 1,
+      "target": "FXL_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 109.92,
+        "quantile_hint": "q05",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "ALT",
+          "op": ">",
+          "value": 158.26,
+          "quantile_hint": "q60",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 9,
+      "target": "FXL_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "RWQ",
+        "op": "<=",
+        "value": 0.973,
+        "quantile_hint": "q60",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "ALT",
+          "op": "<=",
+          "value": 93.09,
+          "quantile_hint": "custom",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 10,
+      "target": "FXL_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 93.09,
+        "quantile_hint": "custom",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "FFP",
+          "op": "<=",
+          "value": 0.01,
+          "quantile_hint": "q75",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 17,
+      "target": "FXL_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "BIO1",
+        "op": "<=",
+        "value": 9,
+        "quantile_hint": "q40",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "FFP",
+          "op": ">",
+          "value": 0.374,
+          "quantile_hint": "q50",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    }
+  ],
+  "fold_4": [
+    {
+      "tree_id": 1,
+      "target": "FXL_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 107.42,
+        "quantile_hint": "q05",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "ALT",
+          "op": ">",
+          "value": 134.62,
+          "quantile_hint": "q40",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 14,
+      "target": "FXL_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "RWQ",
+        "op": "<=",
+        "value": 3.0,
+        "quantile_hint": "q95",
+        "left": {
+          "leaf": 0
+        },
+        "right": {
+          "feature": "FFP",
+          "op": "<=",
+          "value": 0.01,
+          "quantile_hint": "q25",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    },
+    {
+      "tree_id": 14,
+      "target": "FXL_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 134.62,
+        "quantile_hint": "q05",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "FFP",
+          "op": "<=",
+          "value": 0.00122,
+          "quantile_hint": "q20",
+          "left": {
+            "leaf": 1
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    }
+  ],
+  "fold_5": [
+    {
+      "tree_id": 1,
+      "target": "FXL_BIN",
+      "max_depth": 2,
+      "root": {
+        "feature": "ALT",
+        "op": "<=",
+        "value": 95.24,
+        "quantile_hint": "q05",
+        "left": {
+          "leaf": 1
+        },
+        "right": {
+          "feature": "ALT",
+          "op": ">",
+          "value": 134.62,
+          "quantile_hint": "q20",
+          "left": {
+            "leaf": 0
+          },
+          "right": {
+            "leaf": 0
+          }
+        }
+      }
+    }
+  ]
+}

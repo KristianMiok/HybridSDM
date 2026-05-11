@@ -1,0 +1,32 @@
+{
+  "SYN_A": {
+    "full_name": "Synthetic species A (cold-water specialist)",
+    "n_sites": 280,
+    "n_presence": 182,
+    "n_absence": 98,
+    "true_rules": [
+      "RWQ < 1.0 \u2192 presence (single dominant rule)"
+    ],
+    "noise_level": 0.1
+  },
+  "SYN_B": {
+    "full_name": "Synthetic species B (high-altitude endemic)",
+    "n_sites": 220,
+    "n_presence": 124,
+    "n_absence": 96,
+    "true_rules": [
+      "ALT > 400 m \u2192 presence (single dominant rule)"
+    ],
+    "noise_level": 0.08
+  },
+  "SYN_C": {
+    "full_name": "Synthetic species C (lowland generalist)",
+    "n_sites": 320,
+    "n_presence": 183,
+    "n_absence": 137,
+    "true_rules": [
+      "BIO1 > 10 OR FFP < 0.3 \u2192 presence (disjunctive rule)"
+    ],
+    "noise_level": 0.12
+  }
+}
